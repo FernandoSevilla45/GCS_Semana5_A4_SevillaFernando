@@ -11,6 +11,7 @@ export class MenuPage implements OnInit {
   id_persona:string=""
   datospersona:any=[]
   nombre:string=""
+  contactos:any=[]
   constructor(public servicio: Acceso) { 
     this.servicio.obtenerSesion('idpersona').then((res:any)=>{
       this.id_persona=res
@@ -26,7 +27,7 @@ export class MenuPage implements OnInit {
       accion: 'consulta',
       cod_persona:id
     }
-    this.servicio.enviarDatos(datos).subscribe((res:any)=>{
+    this.servicio.enviarDatos(datos,"persona").subscribe((res:any)=>{
       if(res.estado){
         this.datospersona=res.persona
         this.nombre=this.datospersona.nombre+" "+this.datospersona.apellido
@@ -35,6 +36,20 @@ export class MenuPage implements OnInit {
 
       }
     })
+    
+    
   }
-
+  lcontactos(){
+    let datos={
+      accion:'consultar',
+      cod_persona:this.id_persona
+    }
+    this.servicio.enviarDatos(datos,"contacto").subscribe((res:any)=>{
+      if(res.estado){
+        this.contactos=res.datos
+      }else{
+        this.servicio.mostrarToast(res.mensaje,3000)
+      }
+    })
+  }
 }

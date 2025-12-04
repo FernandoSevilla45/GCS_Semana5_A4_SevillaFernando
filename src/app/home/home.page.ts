@@ -20,7 +20,7 @@ txt_cla: string=""
       usuario: this.txt_usu,
       clave:this.txt_cla
     }
-    this.servicio.enviarDatos(datos).subscribe((res:any)=>{
+    this.servicio.enviarDatos(datos,"persona").subscribe((res:any)=>{
       if(res.estado){
         this.servicio.mostrarToast(res.codigo,3000)
         this.servicio.crearSession('idpersona',res.codigo)

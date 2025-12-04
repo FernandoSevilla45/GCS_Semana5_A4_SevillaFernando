@@ -7,19 +7,24 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class Acceso {
-  server: string="http://localhost/WSAGENDA26/datos/persona.php"
-  
-
+  persona: string="http://localhost/WSAGENDA26/datos/persona.php"
+  contacto: string="http://localhost/WSAGENDA26/datos/contacto.php"  
+  server:string=""
 constructor(public toastCtrl: ToastController, public http:HttpClient){ 
 }
 
-enviarDatos(cuerpo:any){
+enviarDatos(cuerpo:any, tabla:string){
+  if(tabla=="persona"){
+    this.server=this.persona
+  }else{
+    this.server=this.contacto
+  }
+
   let head = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
   let opciones={
     headers:head
   }
   return this.http.post(this.server, JSON.stringify(cuerpo), opciones)
-  //return this.http.post(this.server, cuerpo, opciones);
 
 }
 
