@@ -15,10 +15,10 @@ export class RecuperarPage implements OnInit {
   txt_correo:string=""
   txt_clave:string=""
   txt_clave2:string=""
-
-  constructor(public servicio:Acceso, public modalCtrl: ModalController){}
   mensaje: string = ""
   bloqueado=false 
+
+  constructor(public servicio:Acceso, public modalCtrl: ModalController){}
   ngOnInit(){
     
   }
